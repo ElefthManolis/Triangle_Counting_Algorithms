@@ -44,6 +44,8 @@ def main():
         graph = create_graph(cwd + '/graph_data/facebook/facebook_combined.txt')
     if args.graph == "roads":
         graph = create_graph(cwd + '/graph_data/california_road_network/roadNet-CA.txt')
+    if args.graph == "journal":
+        graph = create_graph(cwd + '/graph_data/live_journal/soc-LiveJournal1.txt')
 
     sparsed_graph = sparsify_graph(graph, args.p)
     doulion_triangles = doulion(sparsed_graph, args.p)

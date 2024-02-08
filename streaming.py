@@ -21,6 +21,8 @@ def parse_args():
     parser = argparse.ArgumentParser(add_help=True)
     parser.add_argument('--graph', type=str, required=True,
                     help='The name of the graph (facebook or roads)')
+    parser.add_argument('--M', type=str, required=True,
+                    help='parameter M of the triest algorithm')
     args = parser.parse_args() 
     return args
 
@@ -132,10 +134,11 @@ def main():
         graphfile = cwd + '/graph_data/facebook/facebook_combined.txt'
     if args.graph == "roads":
         graphfile = cwd + '/graph_data/california_road_network/roadNet-CA.txt'
+    if args.graph == "journal":
+        graphfile = cwd + '/graph_data/live_journal/soc-LiveJournal1.txt'
 
 
-    
-    triest_triangles = run_triest_base(graphfile, 10000)
+    triest_triangles = run_triest_base(graphfile, int(args.M))
     
 
 
