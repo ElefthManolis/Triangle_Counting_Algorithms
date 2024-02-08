@@ -39,8 +39,17 @@ def node_iterator(graph: nx.Graph) -> int:
     return cnt_triangles/3
 
 @timeit
-def compact_forward() -> int:
-    pass
+def compact_forward(graph: nx.Graph) -> int:
+    cnt_triangles = 0
+    for node in graph.nodes():
+        neighbors = set(graph.neighbors(node))
+        for n1 in neighbors:
+            for n2 in neighbors.intersection(graph.neighbors(n1)):
+                cnt_triangles += 1
+
+    # Each triangle is counted three times, so divide by 3 to get the correct count
+    cnt_triangles //= 3
+    return cnt_triangles
 
 
 def main():
@@ -52,14 +61,18 @@ def main():
         graph = create_graph(cwd + '/graph_data/california_road_network/roadNet-CA.txt')
 
     print(graph)
-
+    
     # Brute Force exact algorithm
     at_triangles = all_triplets(graph)
-    print('The number of triangles is: ', at_triangles)
+    print('The number of triangles with all triplets algorithm is: ', at_triangles)
 
     # Node Iterator exact algorithm
     ni_triangles = node_iterator(graph)
-    print('The number of triangles is: ', ni_triangles)
+    print('The number of triangles with node iterator algorithm is: ', ni_triangles)
+    
+    # Compact Forward exact algorithm
+    ni_triangles = compact_forward(graph)
+    print('The number of triangles with compact forward algorithm is: ', ni_triangles)
 
 
 
