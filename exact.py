@@ -40,7 +40,7 @@ def node_iterator(graph: nx.Graph) -> int:
 
 @timeit
 def compact_forward() -> int:
-
+    pass
 
 
 def main():

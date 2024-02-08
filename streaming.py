@@ -8,7 +8,7 @@ import argparse
 import random
 import networkx as nx
 from collections import defaultdict
-
+from utils.utils import timeit
 
 
 
@@ -96,12 +96,11 @@ def estimate_triangles(M, time):
         estimate =1
     return int(estimate) * global_T
 
-
+@timeit
 def run_triest_base(graphfile, M):
     time = 0 # variable for time simulation
     with open(graphfile, 'r') as file:
         for line in file:
-            print(time)
             line = " ".join(line.split())
             node1, node2 = line.split(' ')
             if node1 == node2:
